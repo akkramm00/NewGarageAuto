@@ -12,37 +12,42 @@ class Vehicules
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?int $id;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $model = null;
+    private ?string $model;
 
     #[ORM\Column]
     #[Assert\NotNull()]
     #[Assert\Positive()]
-    private ?float $price = null;
+    private ?float $price;
 
     #[ORM\Column(length: 50)]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $year = null;
+    private ?string $year;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $boite = null;
+    private ?string $boite;
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $energie = null;
+    private ?string $energie;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(min: 2, max: 50)]
-    private ?string $puissance = null;
+    private ?string $puissance;
 
-    #[ORM\Column]
+    #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
