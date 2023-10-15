@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\VehiculesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehiculesRepository::class)]
 class Vehicules
@@ -14,24 +15,33 @@ class Vehicules
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $model = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
+    #[Assert\Positive()]
     private ?float $price = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $year = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $boite = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $energie = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $puissance = null;
 
     #[ORM\Column]
+    #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt = null;
 
     public function getId(): ?int
